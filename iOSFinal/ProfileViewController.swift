@@ -97,6 +97,28 @@ class ProfileViewController: UIViewController {
         cleanlinessLabel.textColor = viewColor
         whiteView.addSubview(cleanlinessValueLabel)
         
+        sleepingLabel = UILabel()
+        sleepingLabel.text = "Sleeping Habits"
+        sleepingLabel.textColor = .gray
+        sleepingLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        whiteView.addSubview(sleepingLabel)
+        
+        sleepingValueLabel = UILabel()
+        sleepingValueLabel.text = "My Sleeping Habits"
+        sleepingValueLabel.textColor = viewColor
+        whiteView.addSubview(sleepingValueLabel)
+        
+        wakingLabel = UILabel()
+        wakingLabel.text = "Waking Up"
+        wakingLabel.textColor = .gray
+        wakingLabel.font = UIFont.boldUIFont.boldSystemFont(ofSize: 14)
+        whiteView.addSubview(wakingLabel)
+        
+        wakingValueLabel = UILabel()
+        wakingValueLabel.text = "My Wakeup Time"
+        wakingValueLabel.textColor = view.Color
+        whiteView.addSubview(wakingValueLabel)
+        
         dismissButton = UIButton()
         dismissButton.setTitle("Dismiss", for: .normal)
         dismissButton.setTitleColor(UIColor.white, for: .normal)
@@ -131,8 +153,31 @@ class ProfileViewController: UIViewController {
             make.top.equalTo(cleanlinessLabel.snp.top)
         }
         
+        sleepingLabel.snp.makeConstraints { make in
+             make.leading.equalTo(noiseToleranceLabel.snp.leading)
+             make.top.equalTo(cleanlinessLabel.snp.bottom).offset(50)
+             make.height.equalTo(labelHeight)  
+        }
+        
+        sleepingValueLabel.snp.makeConstraints { make in
+             make.trailing.equalTo(noiseToleranceValueLabel.snp.trailing)
+             make.top.equalTo(sleepingLabel.snp.top)
+             }
+        
+        wakingLabel.snp.makeConstraints { make in
+             make.leading.equalTo(noiseToleranceLabel.snp.leading)       
+             make.top.equalTo(sleepingLabel.snp.bottom).offset(50)
+             make.height.equalTo(labelHeight) 
+            }
+        
+        WakingValueLabel.snp.makeConstraints { make in
+             make.trailing.equalTo(noiseToleranceValueLabel.snp.trailing)
+             make.top.equalTo(wakingLabel.snp.top)
+            }
+        
         dismissButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.SafeAreaLayoutGuide.snp.bottom).offset(-32)
             make.width.equalToSuperview().offset(32)
             make.height.equalTo(50)
         }
