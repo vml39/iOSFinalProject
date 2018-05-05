@@ -21,6 +21,7 @@
 		D70B4258209CEC9D0062B5E4 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B4257209CEC9D0062B5E4 /* SurveyViewController.swift */; };
 		D70B425A209CECBD0062B5E4 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B4259209CECBD0062B5E4 /* ProfileTableViewCell.swift */; };
 		D70B425C209CECD20062B5E4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B425B209CECD20062B5E4 /* Profile.swift */; };
+		D7609721209D77A800C60142 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7609720209D77A800C60142 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		D70B4257209CEC9D0062B5E4 /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		D70B4259209CECBD0062B5E4 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		D70B425B209CECD20062B5E4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D7609720209D77A800C60142 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E8287F291E7BAE7AE5A75BAF /* Pods-iOSFinalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalUITests/Pods-iOSFinalUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,14 +149,15 @@
 			children = (
 				D70B4225209CEBB00062B5E4 /* AppDelegate.swift */,
 				D70B4227209CEBB00062B5E4 /* ViewController.swift */,
+				D7609720209D77A800C60142 /* ProfileViewController.swift */,
 				D70B4253209CEC4B0062B5E4 /* NetworkManager.swift */,
 				D70B4255209CEC7A0062B5E4 /* FilterViewController.swift */,
 				D70B4257209CEC9D0062B5E4 /* SurveyViewController.swift */,
 				D70B4259209CECBD0062B5E4 /* ProfileTableViewCell.swift */,
 				D70B425B209CECD20062B5E4 /* Profile.swift */,
+				D70B4231209CEBB00062B5E4 /* Info.plist */,
 				D70B422C209CEBB00062B5E4 /* Assets.xcassets */,
 				D70B422E209CEBB00062B5E4 /* LaunchScreen.storyboard */,
-				D70B4231209CEBB00062B5E4 /* Info.plist */,
 			);
 			path = iOSFinal;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				D70B425C209CECD20062B5E4 /* Profile.swift in Sources */,
 				D70B425A209CECBD0062B5E4 /* ProfileTableViewCell.swift in Sources */,
 				D70B4226209CEBB00062B5E4 /* AppDelegate.swift in Sources */,
+				D7609721209D77A800C60142 /* ProfileViewController.swift in Sources */,
 				D70B4258209CEC9D0062B5E4 /* SurveyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

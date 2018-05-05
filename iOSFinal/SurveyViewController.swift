@@ -11,11 +11,9 @@ import SnapKit
 
 class SurveyViewController: UIViewController {
     
-    // sign up with name, netid --> take them to view with the form
-    // if already signed in, lead them to survey
-    // otherwise takes them to main vc
-    
     var scrollView: UIScrollView!
+    
+    var stackView: UIStackView!
     
     var profilePicture: UIImageView!
     
@@ -32,20 +30,33 @@ class SurveyViewController: UIViewController {
     var noiseToleranceLowLabel: UILabel!
     var noiseToleranceAlrightLabel: UILabel!
     var noiseToleranceHighLabel: UILabel!
+    var noiseToleranceStackView: UIStackView!
     var noiseToleranceSlider: UISlider!
     
     var cleanlinessLabel: UILabel!
     var cleanlinessMessyLabel: UILabel!
     var cleanlinessAlrightLabel: UILabel!
     var cleanlinessNeatLabel: UILabel!
+    var cleanlinessStackView: UIStackView!
     var cleanlinessSlider: UISlider!
     
     var sleepingLabel: UILabel!
     //nsbutton with instance of ns switch button
-    var sleepingButton: UIButton!
+//    var sleepingButton1: UIButton!
+//    var sleepingButton2: UIButton!
+//    var sleepingButton3: UIButton!
+    var sleepingLabel1: UILabel!
+    var sleepingLabel2: UILabel!
+    var sleepingLabel3: UILabel!
+    var sleepingStackView: UIStackView!
+    var sleepingSlider: UISlider!
     
     var wakingLabel: UILabel!
-    var wakingButton: UIButton!
+    var wakingLabel1: UILabel!
+    var wakingLabel2: UILabel!
+    var wakingLabel3: UILabel!
+    var wakingStackView: UIStackView!
+    var wakingSlider: UISlider!
     
     var saveButton: UIButton!
     var delegate: SaveButtonDelegate?
@@ -55,10 +66,9 @@ class SurveyViewController: UIViewController {
     let textfieldHeight: CGFloat = 40
     let labelHeight: CGFloat = 20
     
-    let textFieldColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.3)
-    let borderColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.6)
-    
-    let myColor: UIColor = UIColor.black
+    let textFieldColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.1)
+    let borderColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.2)
+    let buttonColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,35 +77,36 @@ class SurveyViewController: UIViewController {
         self.navigationItem.title = "About You"
         view.backgroundColor = .white
         
+        scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        view.addSubview(scrollView)
+        
         nameLabel = UILabel()
         nameLabel.text = "Name"
-        view.addSubview(nameLabel)
         
         nameTextfield = UITextField()
         nameTextfield.delegate = self
         nameTextfield.placeholder = "What's your name?"
         nameTextfield.backgroundColor = textFieldColor
         nameTextfield.layer.cornerRadius = 10
-//        nameTextfield.layer.borderColor = myColor.cgColor
+        nameTextfield.layer.borderColor = borderColor.cgColor
+        nameTextfield.layer.borderWidth = 1
         nameTextfield.returnKeyType = .done
-        view.addSubview(nameTextfield)
-        
         
         majorLabel = UILabel()
         majorLabel.text = "Major"
-        view.addSubview(majorLabel)
         
         majorTextfield = UITextField()
         majorTextfield.delegate = self
         majorTextfield.placeholder = "What do you want to study?"
         majorTextfield.backgroundColor = textFieldColor
         majorTextfield.layer.cornerRadius = 10
+        majorTextfield.layer.borderColor = borderColor.cgColor
+        majorTextfield.layer.borderWidth = 1
         majorTextfield.returnKeyType = .done
-        view.addSubview(majorTextfield)
         
         funFactLabel = UILabel()
         funFactLabel.text = "Fun Fact"
-        view.addSubview(funFactLabel)
         
         funFactTextView = UITextView()
         funFactTextView.delegate = self
@@ -104,202 +115,301 @@ class SurveyViewController: UIViewController {
         funFactTextView.textColor = .black
         funFactTextView.backgroundColor = textFieldColor
         funFactTextView.layer.cornerRadius = 10
+        funFactTextView.layer.borderColor = borderColor.cgColor
+        funFactTextView.layer.borderWidth = 1
         funFactTextView.returnKeyType = .done
-        view.addSubview(funFactTextView)
         
         noiseToleranceLabel = UILabel()
         noiseToleranceLabel.text = "Noise Tolerance"
-        view.addSubview(noiseToleranceLabel)
         
         noiseToleranceLowLabel = UILabel()
         noiseToleranceLowLabel.text = "Low"
         noiseToleranceLowLabel.textColor = .gray
-        view.addSubview(noiseToleranceLowLabel)
         
         noiseToleranceAlrightLabel = UILabel()
         noiseToleranceAlrightLabel.text = "Alright"
         noiseToleranceAlrightLabel.textColor = .gray
-        view.addSubview(noiseToleranceAlrightLabel)
         
         noiseToleranceHighLabel = UILabel()
         noiseToleranceHighLabel.text = "High"
         noiseToleranceHighLabel.textColor = .gray
-        view.addSubview(noiseToleranceHighLabel)
+        
+        noiseToleranceStackView = UIStackView(arrangedSubviews: [noiseToleranceLowLabel, noiseToleranceAlrightLabel, noiseToleranceHighLabel])
+        noiseToleranceStackView.axis = .horizontal
+        noiseToleranceStackView.distribution = .equalCentering
         
         noiseToleranceSlider = UISlider()
-        view.addSubview(noiseToleranceSlider)
         
         cleanlinessLabel = UILabel()
         cleanlinessLabel.text = "Cleanliness"
-        view.addSubview(cleanlinessLabel)
         
         cleanlinessMessyLabel = UILabel()
         cleanlinessMessyLabel.text = "Messy"
         cleanlinessMessyLabel.textColor = .gray
-        view.addSubview(cleanlinessMessyLabel)
         
         cleanlinessAlrightLabel = UILabel()
         cleanlinessAlrightLabel.text = "Alright"
         cleanlinessAlrightLabel.textColor = .gray
-        view.addSubview(cleanlinessAlrightLabel)
         
         cleanlinessNeatLabel = UILabel()
         cleanlinessNeatLabel.text = "Neat"
         cleanlinessNeatLabel.textColor = .gray
-        view.addSubview(cleanlinessNeatLabel)
+        
+        cleanlinessStackView = UIStackView(arrangedSubviews: [cleanlinessMessyLabel, cleanlinessAlrightLabel, cleanlinessNeatLabel])
+        cleanlinessStackView.axis = .horizontal
+        cleanlinessStackView.distribution = .equalCentering
         
         cleanlinessSlider = UISlider()
-        view.addSubview(cleanlinessSlider)
         
         sleepingLabel = UILabel()
         sleepingLabel.text = "Sleeping Habits"
-        view.addSubview(sleepingLabel)
         
-        sleepingButton = UIButton()
-        view.addSubview(sleepingButton)
+        sleepingLabel1 = UILabel()
+        sleepingLabel1.text = "9 PM"
+        sleepingLabel1.textColor = .gray
+        
+        sleepingLabel2 = UILabel()
+        sleepingLabel2.text = "12 AM"
+        sleepingLabel2.textColor = .gray
+        
+        sleepingLabel3 = UILabel()
+        sleepingLabel3.text = "3 AM"
+        sleepingLabel3.textColor = .gray
+        
+        sleepingStackView = UIStackView(arrangedSubviews: [sleepingLabel1, sleepingLabel2, sleepingLabel3])
+        sleepingStackView.axis = .horizontal
+        sleepingStackView.distribution = .equalCentering
+        
+        sleepingSlider = UISlider()
+        
+//        sleepingButton1 = UIButton()
+//        sleepingButton1.setTitle("Before 11 PM", for: .normal)
+//        sleepingButton1.setTitleColor(.black, for: .normal)
+//        sleepingButton1.titleLabel?.numberOfLines = 0
+//        sleepingButton1.layer.cornerRadius = 10
+//        sleepingButton1.layer.borderColor = borderColor.cgColor
+//        sleepingButton1.layer.borderWidth = 1
+//        sleepingButton1.layer.backgroundColor = textFieldColor.cgColor
+//
+//        sleepingButton2 = UIButton()
+//        sleepingButton2.setTitle("11 PM - 1 AM", for: .normal)
+//        sleepingButton2.setTitleColor(.black, for: .normal)
+//        sleepingButton2.titleLabel?.numberOfLines = 0
+//        sleepingButton2.layer.cornerRadius = 10
+//        sleepingButton2.layer.borderColor = borderColor.cgColor
+//        sleepingButton2.layer.borderWidth = 1
+//        sleepingButton2.layer.backgroundColor = textFieldColor.cgColor
+//
+//        sleepingButton3 = UIButton()
+//        sleepingButton3.setTitle("After 1 AM", for: .normal)
+//        sleepingButton3.setTitleColor(.black, for: .normal)
+//        sleepingButton3.titleLabel?.numberOfLines = 0
+//        sleepingButton3.layer.cornerRadius = 10
+//        sleepingButton3.layer.borderColor = borderColor.cgColor
+//        sleepingButton3.layer.borderWidth = 1
+//        sleepingButton3.layer.backgroundColor = textFieldColor.cgColor
         
         wakingLabel = UILabel()
         wakingLabel.text = "Waking Up"
-        view.addSubview(wakingLabel)
         
-        wakingButton = UIButton()
-        view.addSubview(wakingButton)
+        wakingLabel1 = UILabel()
+        wakingLabel1.text = "6 AM"
+        wakingLabel1.textColor = .gray
+        
+        wakingLabel2 = UILabel()
+        wakingLabel2.text = "9 AM"
+        wakingLabel2.textColor = .gray
+        
+        wakingLabel3 = UILabel()
+        wakingLabel3.text = "12 PM"
+        wakingLabel3.textColor = .gray
+        
+        wakingStackView = UIStackView(arrangedSubviews: [wakingLabel1, wakingLabel2, wakingLabel3])
+        wakingStackView.axis = .horizontal
+        wakingStackView.distribution = .equalCentering
+        
+        wakingSlider = UISlider()
         
         saveButton = UIButton()
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.black, for: .normal)
+        saveButton.layer.backgroundColor = buttonColor.cgColor
+        saveButton.layer.cornerRadius = 10
         saveButton.addTarget(self, action: #selector(surveySaveButtonPressed), for: .touchUpInside)
-        view.addSubview(saveButton)
+        
+        stackView = UIStackView(arrangedSubviews: [nameLabel, nameTextfield, majorLabel, majorTextfield, funFactLabel, funFactTextView, noiseToleranceLabel, noiseToleranceStackView, noiseToleranceSlider, cleanlinessLabel, cleanlinessStackView, cleanlinessSlider, sleepingLabel, sleepingStackView, sleepingSlider, wakingLabel, wakingStackView, wakingSlider, saveButton])
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.setCustomSpacing(8, after: nameLabel)
+        stackView.setCustomSpacing(8, after: majorLabel)
+        stackView.setCustomSpacing(8, after: funFactLabel)
+        stackView.setCustomSpacing(8, after: noiseToleranceStackView)
+        stackView.setCustomSpacing(8, after: cleanlinessStackView)
+        stackView.setCustomSpacing(8, after: sleepingStackView)
+        stackView.setCustomSpacing(8, after: wakingStackView)
+        
+        scrollView.addSubview(stackView)
         
         setUpConstraints()
     }
     
     private func setUpConstraints(){
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
-            make.leading.equalToSuperview().offset(32)
-            make.height.equalTo(labelHeight)
+        scrollView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         nameTextfield.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-32)
-            make.top.equalTo(nameLabel.snp.bottom).offset(smallerPadding)
             make.height.equalTo(textfieldHeight)
-        }
-        
-        majorLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(nameTextfield.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
         }
         
         majorTextfield.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-32)
-            make.top.equalTo(majorLabel.snp.bottom).offset(smallerPadding)
             make.height.equalTo(textfieldHeight)
         }
         
-        funFactLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(majorTextfield.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
         funFactTextView.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-32)
-            make.top.equalTo(funFactLabel.snp.bottom).offset(smallerPadding)
             make.height.equalTo(2*textfieldHeight)
         }
         
-        noiseToleranceLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(funFactTextView.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        noiseToleranceLowLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(noiseToleranceLabel.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        noiseToleranceAlrightLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(noiseToleranceLowLabel.snp.top)
-            make.height.equalTo(labelHeight)
-        }
-        
-        noiseToleranceHighLabel.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
-            make.top.equalTo(noiseToleranceLowLabel.snp.top)
-            make.height.equalTo(labelHeight)
-        }
-        
-        noiseToleranceSlider.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.trailing.equalTo(noiseToleranceHighLabel.snp.trailing)
-            make.top.equalTo(noiseToleranceLowLabel.snp.bottom).offset(smallerPadding)
-        }
-        
-        cleanlinessLabel.snp.makeConstraints { make in // word wrap
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(noiseToleranceSlider.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        cleanlinessMessyLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(cleanlinessLabel.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        cleanlinessAlrightLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(cleanlinessMessyLabel.snp.top)
-            make.height.equalTo(labelHeight)
-        }
-        
-        cleanlinessNeatLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-32)
-            make.top.equalTo(cleanlinessMessyLabel.snp.top)
-            make.height.equalTo(labelHeight)
-        }
-        
-        cleanlinessSlider.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.trailing.equalTo(cleanlinessNeatLabel.snp.trailing)
-            make.top.equalTo(cleanlinessMessyLabel.snp.bottom).offset(smallerPadding)
-        }
-        
-        sleepingLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(cleanlinessSlider.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        sleepingButton.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(sleepingLabel.snp.bottom).offset(smallerPadding) // have 3 buttons, figure out how to do this
-        }
-        
-        wakingLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(sleepingButton.snp.bottom).offset(padding)
-            make.height.equalTo(labelHeight)
-        }
-        
-        wakingButton.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(wakingLabel.snp.bottom).offset(smallerPadding)
+            make.width.equalToSuperview().offset(-64)
+            make.height.equalToSuperview()
         }
         
         saveButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-64)
+            make.width.equalTo(stackView.snp.width)
+            make.height.equalTo(50)
         }
+        
+//        nameLabel.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(100)
+//            make.leading.equalToSuperview().offset(32)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        nameTextfield.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.trailing.equalToSuperview().offset(-32)
+//            make.top.equalTo(nameLabel.snp.bottom).offset(smallerPadding)
+//            make.height.equalTo(textfieldHeight)
+//        }
+//
+//        majorLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(nameTextfield.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        majorTextfield.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.trailing.equalToSuperview().offset(-32)
+//            make.top.equalTo(majorLabel.snp.bottom).offset(smallerPadding)
+//            make.height.equalTo(textfieldHeight)
+//        }
+//
+//        funFactLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(majorTextfield.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        funFactTextView.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.trailing.equalToSuperview().offset(-32)
+//            make.top.equalTo(funFactLabel.snp.bottom).offset(smallerPadding)
+//            make.height.equalTo(2*textfieldHeight)
+//        }
+//
+//        noiseToleranceLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(funFactTextView.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        noiseToleranceLowLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(noiseToleranceLabel.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        noiseToleranceAlrightLabel.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(noiseToleranceLowLabel.snp.top)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        noiseToleranceHighLabel.snp.makeConstraints { make in
+//            make.trailing.equalToSuperview().offset(-32)
+//            make.top.equalTo(noiseToleranceLowLabel.snp.top)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        noiseToleranceSlider.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.trailing.equalTo(noiseToleranceHighLabel.snp.trailing)
+//            make.top.equalTo(noiseToleranceLowLabel.snp.bottom).offset(smallerPadding)
+//        }
+//
+//        cleanlinessLabel.snp.makeConstraints { make in // word wrap
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(noiseToleranceSlider.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        cleanlinessMessyLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(cleanlinessLabel.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        cleanlinessAlrightLabel.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(cleanlinessMessyLabel.snp.top)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        cleanlinessNeatLabel.snp.makeConstraints { make in
+//            make.trailing.equalToSuperview().offset(-32)
+//            make.top.equalTo(cleanlinessMessyLabel.snp.top)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        cleanlinessSlider.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.trailing.equalTo(cleanlinessNeatLabel.snp.trailing)
+//            make.top.equalTo(cleanlinessMessyLabel.snp.bottom).offset(smallerPadding)
+//        }
+//
+//        sleepingLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(cleanlinessSlider.snp.bottom).offset(padding)
+//            make.height.equalTo(labelHeight)
+//        }
+//
+//        sleepingButton.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(sleepingLabel.snp.bottom).offset(smallerPadding) // have 3 buttons, figure out how to do this
+//        }
+//
+//        wakingLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(sleepingButton.snp.bottom).offset(padding)
+//            make.height.equalTo(100)
+//        }
+//
+//        wakingButton.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel.snp.leading)
+//            make.top.equalTo(wakingLabel.snp.bottom).offset(smallerPadding)
+//        }
+//
+//        saveButton.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.bottom.equalToSuperview().offset(-64)
+//        }
         
     }
     
