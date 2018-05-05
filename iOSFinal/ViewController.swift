@@ -35,6 +35,7 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     let padding: CGFloat = 16
     
     let myColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.4)
+    let buttonColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,9 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         
         filterButton = UIButton(type: .system)
         filterButton.setTitle("Filter", for: .normal)
-        filterButton.setTitleColor(UIColor.black, for: .normal)
+        filterButton.setTitleColor(UIColor.white, for: .normal)
+        filterButton.backgroundColor = buttonColor
+        filterButton.layer.cornerRadius = 5
         filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
         view.addSubview(filterButton)
         
@@ -85,12 +88,6 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
          }
-        
-//        surveyButton.snp.makeConstraints { make in //ideally put this in the nav
-//            make.top.equalTo(view.snp.top).offset(100)
-//            make.size.equalTo(surveyButton.intrinsicContentSize)
-//            make.centerX.equalToSuperview()
-//        }
         
         searchLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
@@ -108,7 +105,8 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         filterButton.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-            make.size.equalTo(filterButton.intrinsicContentSize)
+            make.width.equalToSuperview().offset(32)
+            make.height.equalTo(50)
         }
         
     }
@@ -156,7 +154,9 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         
         let profileVC = ProfileViewController()
         profileVC.delegate = self
-        //p4
+        profileVC.nameLabel.text = profiles[indexPath.row].name
+        profileVC.majorLabel.text = profiles[indexPath.row].major
+        profileVC.funFactLabel.text = profiles[indexPath.row].funFact
 
         profileVC.row = indexPath.row
         present(profileVC, animated: true, completion: nil)

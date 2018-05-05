@@ -7,50 +7,135 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileViewController: UIViewController {
     
+    var colorView: UIView!
+    
     var nameLabel: UILabel!
-    var nameLabel1: UILabel!
     
     var majorLabel: UILabel!
-    var majorLabel1: UILabel!
     
     var funFactLabel: UILabel!
+    
+    var whiteView: UIView!
+    
+    var noiseToleranceLabel: UILabel!
+    var noiseToleranceValueLabel: UILabel!
+    
+    var cleanlinessLabel: UILabel!
+    var cleanlinessValueLabel: UILabel!
+    
+    var sleepingLabel: UILabel!
+    var sleepingValueLabel: UILabel!
+    
+    var wakingLabel: UILabel!
+    var wakingValueLabel: UILabel!
     
     // figure out what the return type of the slider is and determine some way to represent it
     
     var dismissButton: UIButton!
     var delegate: SaveButtonDelegate?
     var row: Int?
+    
+    let labelHeight: CGFloat = 20
+    let viewColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = .white
+        view.backgroundColor = viewColor
+        
+        colorView = UIView()
+        colorView.backgroundColor = viewColor
         
         nameLabel = UILabel()
         nameLabel.text = "Name"
+        nameLabel.textColor = .white
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        colorView.addSubview(nameLabel)
         
         // set the background color of the label1 to be the color
         
         majorLabel = UILabel()
         majorLabel.text = "Major"
+        majorLabel.textColor = .white
+        colorView.addSubview(majorLabel)
         
-        // for fun fact, concatenate the quotes to the user submitted fun fact
+        funFactLabel = UILabel()
+        funFactLabel.text = "\"Fun Fact\""
+        funFactLabel.textColor = .white
+//        funFactLabel.contentMode = .scaleToFill
+        funFactLabel.numberOfLines = 0
+        colorView.addSubview(funFactLabel)
+        
+        whiteView = UIView()
+        whiteView.backgroundColor = .white
+        
+        noiseToleranceLabel = UILabel()
+        noiseToleranceLabel.text = "Noise Tolerance"
+        noiseToleranceLabel.textColor = .gray
+        noiseToleranceLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        whiteView.addSubview(noiseToleranceLabel)
+        
+        noiseToleranceValueLabel = UILabel()
+        noiseToleranceValueLabel.text = "My Noise Tolerance"
+        noiseToleranceValueLabel.textColor = viewColor
+        whiteView.addSubview(noiseToleranceValueLabel)
+        
+        cleanlinessLabel = UILabel()
+        cleanlinessLabel.text = "Cleanliness"
+        cleanlinessLabel.textColor = .gray
+        cleanlinessLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        whiteView.addSubview(cleanlinessLabel)
+    
+        cleanlinessValueLabel = UILabel()
+        cleanlinessValueLabel.text = "My Cleanliness"
+        cleanlinessLabel.textColor = viewColor
+        whiteView.addSubview(cleanlinessValueLabel)
         
         dismissButton = UIButton()
         dismissButton.setTitle("Dismiss", for: .normal)
-        dismissButton.setTitleColor(UIColor.darkGray, for: .normal)
+        dismissButton.setTitleColor(UIColor.white, for: .normal)
+        dismissButton.layer.backgroundColor = viewColor.cgColor
+        dismissButton.layer.cornerRadius = 5
         dismissButton.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+        whiteView.addSubview(dismissButton)
         
         setUpConstraints()
     }
     
     func setUpConstraints() {
+        noiseToleranceLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(32)
+            make.top.equalTo(whiteView.snp.top).offset(32)
+            make.height.equalTo(labelHeight)
+        }
         
+        noiseToleranceValueLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-32)
+            make.top.equalTo(noiseToleranceLabel.snp.top)
+        }
+        
+        cleanlinessLabel.snp.makeConstraints { make in
+            make.leading.equalTo(noiseToleranceLabel.snp.leading)
+            make.top.equalTo(noiseToleranceLabel.snp.bottom).offset(50)
+            make.height.equalTo(labelHeight)
+        }
+        
+        cleanlinessValueLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(noiseToleranceValueLabel.snp.trailing)
+            make.top.equalTo(cleanlinessLabel.snp.top)
+        }
+        
+        dismissButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().offset(32)
+            make.height.equalTo(50)
+        }
     }
     
     @objc func dismissButtonPressed(sender: UIButton) {

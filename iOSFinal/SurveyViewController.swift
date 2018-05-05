@@ -41,10 +41,6 @@ class SurveyViewController: UIViewController {
     var cleanlinessSlider: UISlider!
     
     var sleepingLabel: UILabel!
-    //nsbutton with instance of ns switch button
-//    var sleepingButton1: UIButton!
-//    var sleepingButton2: UIButton!
-//    var sleepingButton3: UIButton!
     var sleepingLabel1: UILabel!
     var sleepingLabel2: UILabel!
     var sleepingLabel3: UILabel!
