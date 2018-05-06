@@ -38,3 +38,5 @@ Backend
 Anything else you want your grader to know
 
 The backend team had some difficulty and didn't send me the API soon enough, so I was unable to include the Network. I wrote the code for it but couldn't use the search/filter functions and couldn't send the user survey to database. I've hardcoded some data in the ViewController. Also my laptop broke last week :( It's quite difficult and inconvenient to code in XCode without a laptop, specifically a Mac on this campus. -Vivian, iOS
+
+P.S. Kevin and Mindy are star TAs
