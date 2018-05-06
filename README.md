@@ -34,6 +34,8 @@ iOS
   * API is not integrated, see comments at the end
 
 Backend
+  *Issues: We kept having bugs when setting up the database - we tried MySQL then PostgreSQL but and both of them had bugs that we coudlnt fix despite so we ended up using SQLite
+  
 
 Anything else you want your grader to know
 
