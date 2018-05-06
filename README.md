@@ -7,6 +7,10 @@ App Tagline: Find your roommate based on similar living habits!
 Github: https://github.com/vml39/iOSFinalProject
 
 Screenshots
+![](discover.png)
+![](profile.png)
+![](survey.png)
+![](filter.png)
 
 Description
 

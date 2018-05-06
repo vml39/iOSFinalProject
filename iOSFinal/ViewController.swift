@@ -18,6 +18,11 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     
     let profile1 = Profile(name: "Vivian Li", major: "Information Science", funFact: "I am Canadian", noiseTolerance: "Low", cleanliness: "Clean", sleeping: "11 PM - 1 AM", waking: "8 AM - 10 AM")
     let profile2 = Profile(name: "Cedric Castillo", major: "Information Science", funFact: "I do not know him well enough to provide his fun fact for him", noiseTolerance: "Alright", cleanliness: "Messy", sleeping: "After 1 AM", waking: "Before 8 AM")
+     let profile3 = Profile(name: "Linus Setiabrata", major: "Mathematics", funFact: "I like to cut loops", noiseTolerance: "High", cleanliness: "Messy", sleeping: "11 PM - 1 AM", waking: "Before 8 AM")
+     let profile4 = Profile(name: "Joanna Li", major: "GPHS", funFact: "I am extra and I like taking photos", noiseTolerance: "High", cleanliness: "Messy", sleeping: "After 1 AM", waking: "8 AM - 10 AM")
+     let profile5 = Profile(name: "Ally Yuan", major: "Information Science", funFact: "I am really tall", noiseTolerance: "High", cleanliness: "Alright", sleeping: "After 1 AM", waking: "After 10 AM")
+     let profile6 = Profile(name: "Nuri Yi", major: "Biology, Comparative Lit", funFact: "I live in Korea and I like sadboiz", noiseTolerance: "Alright", cleanliness: "Messy", sleeping: "After 1 AM", waking: "Before 8 AM")
+     let profile7 = Profile(name: "David Li", major: "Math, Econ", funFact: "I am Vivian's brother", noiseTolerance: "Alright", cleanliness: "Clean", sleeping: "After 1 AM", waking: "After 10 AM")
     
     var profiles: [Profile] = []
     
@@ -37,7 +42,7 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     
     let myColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.4)
     let buttonColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
-    let cellColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
+    let cellColor: UIColor = UIColor(red: 255/255, green: 182/255, blue: 193/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,11 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         
         profiles.append(profile1)
         profiles.append(profile2)
+        profiles.append(profile3)
+        profiles.append(profile4)
+        profiles.append(profile5)
+        profiles.append(profile6)
+        profiles.append(profile7)
         
         surveyButton = UIButton(type: .system)
         surveyButton.setTitle("Me", for: .normal)
@@ -61,6 +71,7 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         filterButton = UIButton(type: .system)
         filterButton.setTitle("Filter", for: .normal)
         filterButton.setTitleColor(UIColor.white, for: .normal)
+        filterButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         filterButton.backgroundColor = buttonColor
         filterButton.layer.cornerRadius = 5
         filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)

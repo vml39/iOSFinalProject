@@ -13,6 +13,7 @@ class FilterViewController: UIViewController {
     
     var stackView: UIStackView!
     
+    var filterView: UIView!
     var filterLabel: UILabel!
     
     var noiseToleranceLabel: UILabel!
@@ -60,9 +61,16 @@ class FilterViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
+        filterView = UIView()
+        filterView.backgroundColor = buttonColor
+        
         filterLabel = UILabel()
         filterLabel.text = "Filter"
-        view.addSubview(filterLabel)
+        filterLabel.font = UIFont.systemFont(ofSize: 20)
+        filterLabel.textColor = .white
+        filterView.addSubview(filterLabel)
+        
+        view.addSubview(filterView)
         
         noiseToleranceLabel = UILabel()
         noiseToleranceLabel.text = "Noise Tolerance"
@@ -150,7 +158,7 @@ class FilterViewController: UIViewController {
         
         saveButton = UIButton()
         saveButton.setTitle("All Done!", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.layer.backgroundColor = buttonColor.cgColor
         saveButton.layer.cornerRadius = 10
         saveButton.addTarget(self, action: #selector(filterSaveButtonPressed), for: .touchUpInside)
@@ -175,14 +183,20 @@ class FilterViewController: UIViewController {
     }
     
     private func setUpConstraints(){
+        filterView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(100)
+        }
+        
         filterLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(64)
             make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.height.equalTo(labelHeight)
         }
         
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(filterLabel.snp.bottom).offset(32)
+            make.top.equalTo(filterView.snp.bottom).offset(32)
             make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
             make.width.equalToSuperview().offset(-64)
@@ -205,7 +219,7 @@ class FilterViewController: UIViewController {
     
     @objc func filterSaveButtonPressed() {
         delegate?.filterSaveButtonPressed()
-        // do something
+        // send data to database
     }
     
     

@@ -18,9 +18,10 @@ class ProfileTableViewCell: UITableViewCell {
     var funFactLabel: UILabel!
     
     let padding: CGFloat = 16
-    let labelHeight: CGFloat = 20
+    let labelHeight: CGFloat = 24
     
-    let myColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
+    let myColor: UIColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+    let txtColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,13 +36,13 @@ class ProfileTableViewCell: UITableViewCell {
         colorView.addSubview(nameLabel)
         
         majorLabel = UILabel()
-        majorLabel.font = .italicSystemFont(ofSize: 16)
-        majorLabel.textColor = .white
+        majorLabel.font = .italicSystemFont(ofSize: 18)
+        majorLabel.textColor = .gray
         colorView.addSubview(majorLabel)
         
         funFactLabel = UILabel()
-        funFactLabel.font = .systemFont(ofSize: 14)
-        funFactLabel.textColor = .white
+        funFactLabel.font = .systemFont(ofSize: 16)
+        funFactLabel.textColor = txtColor
         funFactLabel.numberOfLines = 0
         funFactLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         
@@ -62,7 +63,7 @@ class ProfileTableViewCell: UITableViewCell {
         }
         
         majorLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.trailing).offset(padding)
+            make.leading.equalTo(nameLabel.snp.trailing).offset(6)
             make.bottom.equalTo(nameLabel.snp.bottom)
             make.height.equalTo(labelHeight)
         }
