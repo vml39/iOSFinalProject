@@ -82,7 +82,7 @@ class SurveyViewController: UIViewController {
         
         nameTextfield = UITextField()
         nameTextfield.delegate = self
-        nameTextfield.placeholder = "What's your name?"
+        nameTextfield.placeholder = " What's your name?"
         nameTextfield.backgroundColor = textFieldColor
         nameTextfield.layer.cornerRadius = 10
         nameTextfield.layer.borderColor = borderColor.cgColor
@@ -94,7 +94,7 @@ class SurveyViewController: UIViewController {
         
         majorTextfield = UITextField()
         majorTextfield.delegate = self
-        majorTextfield.placeholder = "What do you want to study?"
+        majorTextfield.placeholder = " What do you want to study?"
         majorTextfield.backgroundColor = textFieldColor
         majorTextfield.layer.cornerRadius = 10
         majorTextfield.layer.borderColor = borderColor.cgColor
@@ -178,33 +178,6 @@ class SurveyViewController: UIViewController {
         
         sleepingSlider = UISlider()
         
-//        sleepingButton1 = UIButton()
-//        sleepingButton1.setTitle("Before 11 PM", for: .normal)
-//        sleepingButton1.setTitleColor(.black, for: .normal)
-//        sleepingButton1.titleLabel?.numberOfLines = 0
-//        sleepingButton1.layer.cornerRadius = 10
-//        sleepingButton1.layer.borderColor = borderColor.cgColor
-//        sleepingButton1.layer.borderWidth = 1
-//        sleepingButton1.layer.backgroundColor = textFieldColor.cgColor
-//
-//        sleepingButton2 = UIButton()
-//        sleepingButton2.setTitle("11 PM - 1 AM", for: .normal)
-//        sleepingButton2.setTitleColor(.black, for: .normal)
-//        sleepingButton2.titleLabel?.numberOfLines = 0
-//        sleepingButton2.layer.cornerRadius = 10
-//        sleepingButton2.layer.borderColor = borderColor.cgColor
-//        sleepingButton2.layer.borderWidth = 1
-//        sleepingButton2.layer.backgroundColor = textFieldColor.cgColor
-//
-//        sleepingButton3 = UIButton()
-//        sleepingButton3.setTitle("After 1 AM", for: .normal)
-//        sleepingButton3.setTitleColor(.black, for: .normal)
-//        sleepingButton3.titleLabel?.numberOfLines = 0
-//        sleepingButton3.layer.cornerRadius = 10
-//        sleepingButton3.layer.borderColor = borderColor.cgColor
-//        sleepingButton3.layer.borderWidth = 1
-//        sleepingButton3.layer.backgroundColor = textFieldColor.cgColor
-        
         wakingLabel = UILabel()
         wakingLabel.text = "Waking Up"
         
@@ -228,7 +201,7 @@ class SurveyViewController: UIViewController {
         
         saveButton = UIButton()
         saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.layer.backgroundColor = buttonColor.cgColor
         saveButton.layer.cornerRadius = 10
         saveButton.addTarget(self, action: #selector(surveySaveButtonPressed), for: .touchUpInside)
@@ -280,133 +253,6 @@ class SurveyViewController: UIViewController {
             make.width.equalTo(stackView.snp.width)
             make.height.equalTo(50)
         }
-        
-//        nameLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(100)
-//            make.leading.equalToSuperview().offset(32)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        nameTextfield.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.trailing.equalToSuperview().offset(-32)
-//            make.top.equalTo(nameLabel.snp.bottom).offset(smallerPadding)
-//            make.height.equalTo(textfieldHeight)
-//        }
-//
-//        majorLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(nameTextfield.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        majorTextfield.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.trailing.equalToSuperview().offset(-32)
-//            make.top.equalTo(majorLabel.snp.bottom).offset(smallerPadding)
-//            make.height.equalTo(textfieldHeight)
-//        }
-//
-//        funFactLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(majorTextfield.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        funFactTextView.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.trailing.equalToSuperview().offset(-32)
-//            make.top.equalTo(funFactLabel.snp.bottom).offset(smallerPadding)
-//            make.height.equalTo(2*textfieldHeight)
-//        }
-//
-//        noiseToleranceLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(funFactTextView.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        noiseToleranceLowLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(noiseToleranceLabel.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        noiseToleranceAlrightLabel.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(noiseToleranceLowLabel.snp.top)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        noiseToleranceHighLabel.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview().offset(-32)
-//            make.top.equalTo(noiseToleranceLowLabel.snp.top)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        noiseToleranceSlider.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.trailing.equalTo(noiseToleranceHighLabel.snp.trailing)
-//            make.top.equalTo(noiseToleranceLowLabel.snp.bottom).offset(smallerPadding)
-//        }
-//
-//        cleanlinessLabel.snp.makeConstraints { make in // word wrap
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(noiseToleranceSlider.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        cleanlinessMessyLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(cleanlinessLabel.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        cleanlinessAlrightLabel.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(cleanlinessMessyLabel.snp.top)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        cleanlinessNeatLabel.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview().offset(-32)
-//            make.top.equalTo(cleanlinessMessyLabel.snp.top)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        cleanlinessSlider.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.trailing.equalTo(cleanlinessNeatLabel.snp.trailing)
-//            make.top.equalTo(cleanlinessMessyLabel.snp.bottom).offset(smallerPadding)
-//        }
-//
-//        sleepingLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(cleanlinessSlider.snp.bottom).offset(padding)
-//            make.height.equalTo(labelHeight)
-//        }
-//
-//        sleepingButton.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(sleepingLabel.snp.bottom).offset(smallerPadding) // have 3 buttons, figure out how to do this
-//        }
-//
-//        wakingLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(sleepingButton.snp.bottom).offset(padding)
-//            make.height.equalTo(100)
-//        }
-//
-//        wakingButton.snp.makeConstraints { make in
-//            make.leading.equalTo(nameLabel.snp.leading)
-//            make.top.equalTo(wakingLabel.snp.bottom).offset(smallerPadding)
-//        }
-//
-//        saveButton.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.bottom.equalToSuperview().offset(-64)
-//        }
-        
     }
     
     @objc func surveySaveButtonPressed() {
@@ -414,8 +260,6 @@ class SurveyViewController: UIViewController {
             delegate?.surveySaveButtonPressed()
         }
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

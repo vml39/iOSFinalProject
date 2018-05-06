@@ -14,13 +14,14 @@ protocol SaveButtonDelegate {
     func filterSaveButtonPressed()
 }
 
-//navigate to surveyviewcontroller
-//have cells
 class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    let profile1 = Profile(name: "Vivian Li", major: "Information Science", funFact: "I am Canadian", noiseTolerance: "Low", cleanliness: "Clean", sleeping: "11 PM - 1 AM", waking: "8 AM - 10 AM")
+    let profile2 = Profile(name: "Cedric Castillo", major: "Information Science", funFact: "I do not know him well enough to provide his fun fact for him", noiseTolerance: "Alright", cleanliness: "Messy", sleeping: "After 1 AM", waking: "Before 8 AM")
     
     var profiles: [Profile] = []
     
-    var scrollView: UIScrollView!
+    var tableView: UITableView!
     
     var surveyButton: UIButton!
     var surveyBarButtonItem: UIBarButtonItem!
@@ -36,6 +37,7 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     
     let myColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 0.4)
     let buttonColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
+    let cellColor: UIColor = UIColor(red: 255/255, green: 118/255, blue: 109/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +46,8 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         view.backgroundColor = .white
         self.navigationItem.title = "Discover"
         
-        scrollView = UIScrollView()
-        scrollView.alwaysBounceVertical = true
-        view.addSubview(scrollView)
+        profiles.append(profile1)
+        profiles.append(profile2)
         
         surveyButton = UIButton(type: .system)
         surveyButton.setTitle("Me", for: .normal)
@@ -56,6 +57,14 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         
         surveyBarButtonItem = UIBarButtonItem(customView: surveyButton)
         self.navigationItem.rightBarButtonItem = surveyBarButtonItem
+        
+        filterButton = UIButton(type: .system)
+        filterButton.setTitle("Filter", for: .normal)
+        filterButton.setTitleColor(UIColor.white, for: .normal)
+        filterButton.backgroundColor = buttonColor
+        filterButton.layer.cornerRadius = 5
+        filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
+        view.addSubview(filterButton)
         
         searchLabel = UILabel()
         searchLabel.text = "Search"
@@ -68,29 +77,29 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         searchBar.layer.borderWidth = 1
         view.addSubview(searchBar)
         
-        filterButton = UIButton(type: .system)
-        filterButton.setTitle("Filter", for: .normal)
-        filterButton.setTitleColor(UIColor.white, for: .normal)
-        filterButton.backgroundColor = buttonColor
-        filterButton.layer.cornerRadius = 5
-        filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
-        view.addSubview(filterButton)
-        
-//                scrollView.addSubview(stackView)
+        tableView = UITableView()
+        tableView.bounces = true
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.separatorStyle = .none
+        // register all cells into a stackview --> scrollview
+        view.addSubview(tableView)
         
         setUpConstraints()
     }
     
     func setUpConstraints() {
-         scrollView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-         }
+        
+        filterButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().offset(-32)
+            make.height.equalTo(50)
+        }
         
         searchLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
+            make.top.equalTo(filterButton.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(32)
             make.height.equalTo(32)
         }
@@ -102,13 +111,12 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
             make.height.equalTo(32)
         }
         
-        filterButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(8)
+        tableView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().offset(32)
-            make.height.equalTo(50)
+            make.top.equalTo(searchLabel.snp.bottom).offset(16)
+            make.width.equalToSuperview().offset(-40)
+            make.height.equalToSuperview().offset(-118)
         }
-        
     }
     
     @objc func surveyButtonPressed(sender: UIButton) {
@@ -128,7 +136,11 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 16
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,6 +149,10 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
             cell.majorLabel.text = profiles[indexPath.row].major
             cell.funFactLabel.text = profiles[indexPath.row].funFact
             
+            cell.backgroundColor = cellColor
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.borderWidth = 5
+            
             cell.setNeedsUpdateConstraints()
             return cell
         }
@@ -144,7 +160,7 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "songCell") as! ProfileTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ProfileTableViewCell
         
         cell.nameLabel.text = profiles[indexPath.row].name
         cell.majorLabel.text = profiles[indexPath.row].major
@@ -154,10 +170,13 @@ class ViewController: UIViewController, SaveButtonDelegate, UITableViewDataSourc
         
         let profileVC = ProfileViewController()
         profileVC.delegate = self
-        profileVC.nameLabel.text = profiles[indexPath.row].name
-        profileVC.majorLabel.text = profiles[indexPath.row].major
-        profileVC.funFactLabel.text = profiles[indexPath.row].funFact
-
+        profileVC.nameString =  cell.nameLabel.text
+        profileVC.majorString = cell.majorLabel.text
+        profileVC.funFactString = cell.funFactLabel.text
+        profileVC.noiseToleranceValueString = profiles[indexPath.row].noiseTolerance
+        profileVC.cleanlinessValueString = profiles[indexPath.row].cleanliness
+        profileVC.sleepingValueString = profiles[indexPath.row].sleeping
+        profileVC.wakingValueString = profiles[indexPath.row].waking
         profileVC.row = indexPath.row
         present(profileVC, animated: true, completion: nil)
     }

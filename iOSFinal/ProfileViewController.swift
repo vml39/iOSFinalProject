@@ -14,24 +14,31 @@ class ProfileViewController: UIViewController {
     var colorView: UIView!
     
     var nameLabel: UILabel!
+    var nameString: String?
     
     var majorLabel: UILabel!
+    var majorString: String?
     
     var funFactLabel: UILabel!
+    var funFactString: String?
     
     var whiteView: UIView!
     
     var noiseToleranceLabel: UILabel!
     var noiseToleranceValueLabel: UILabel!
+    var noiseToleranceValueString: String?
     
     var cleanlinessLabel: UILabel!
     var cleanlinessValueLabel: UILabel!
+    var cleanlinessValueString: String?
     
     var sleepingLabel: UILabel!
     var sleepingValueLabel: UILabel!
+    var sleepingValueString: String?
     
     var wakingLabel: UILabel!
     var wakingValueLabel: UILabel!
+    var wakingValueString: String?
     
     // figure out what the return type of the slider is and determine some way to represent it
     
@@ -47,29 +54,29 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = viewColor
+        view.backgroundColor = .white
         
         colorView = UIView()
         colorView.backgroundColor = viewColor
         
         nameLabel = UILabel()
-        nameLabel.text = "Name"
+        nameLabel.text = nameString ?? "Name"
         nameLabel.textColor = .white
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 30)
         colorView.addSubview(nameLabel)
         
         // set the background color of the label1 to be the color
         
         majorLabel = UILabel()
-        majorLabel.text = "Major"
+        majorLabel.text = majorString ?? "Major"
         majorLabel.textColor = .white
         colorView.addSubview(majorLabel)
         
         funFactLabel = UILabel()
-        funFactLabel.text = "\"Fun Fact\""
+        funFactLabel.text = funFactString ?? "Fun Fact"
         funFactLabel.textColor = .white
-//        funFactLabel.contentMode = .scaleToFill
         funFactLabel.numberOfLines = 0
+        funFactLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         colorView.addSubview(funFactLabel)
         
         whiteView = UIView()
@@ -78,45 +85,45 @@ class ProfileViewController: UIViewController {
         noiseToleranceLabel = UILabel()
         noiseToleranceLabel.text = "Noise Tolerance"
         noiseToleranceLabel.textColor = .gray
-        noiseToleranceLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        noiseToleranceLabel.font = UIFont.boldSystemFont(ofSize: 18)
         whiteView.addSubview(noiseToleranceLabel)
         
         noiseToleranceValueLabel = UILabel()
-        noiseToleranceValueLabel.text = "My Noise Tolerance"
+        noiseToleranceValueLabel.text = noiseToleranceValueString
         noiseToleranceValueLabel.textColor = viewColor
         whiteView.addSubview(noiseToleranceValueLabel)
         
         cleanlinessLabel = UILabel()
         cleanlinessLabel.text = "Cleanliness"
         cleanlinessLabel.textColor = .gray
-        cleanlinessLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        cleanlinessLabel.font = UIFont.boldSystemFont(ofSize: 18)
         whiteView.addSubview(cleanlinessLabel)
     
         cleanlinessValueLabel = UILabel()
-        cleanlinessValueLabel.text = "My Cleanliness"
-        cleanlinessLabel.textColor = viewColor
+        cleanlinessValueLabel.text = cleanlinessValueString
+        cleanlinessValueLabel.textColor = viewColor
         whiteView.addSubview(cleanlinessValueLabel)
         
         sleepingLabel = UILabel()
         sleepingLabel.text = "Sleeping Habits"
         sleepingLabel.textColor = .gray
-        sleepingLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        sleepingLabel.font = UIFont.boldSystemFont(ofSize: 18)
         whiteView.addSubview(sleepingLabel)
         
         sleepingValueLabel = UILabel()
-        sleepingValueLabel.text = "My Sleeping Habits"
+        sleepingValueLabel.text = sleepingValueString
         sleepingValueLabel.textColor = viewColor
         whiteView.addSubview(sleepingValueLabel)
         
         wakingLabel = UILabel()
         wakingLabel.text = "Waking Up"
         wakingLabel.textColor = .gray
-        wakingLabel.font = UIFont.boldUIFont.boldSystemFont(ofSize: 14)
+        wakingLabel.font = UIFont.boldSystemFont(ofSize: 18)
         whiteView.addSubview(wakingLabel)
         
         wakingValueLabel = UILabel()
-        wakingValueLabel.text = "My Wakeup Time"
-        wakingValueLabel.textColor = view.Color
+        wakingValueLabel.text = wakingValueString
+        wakingValueLabel.textColor = viewColor
         whiteView.addSubview(wakingValueLabel)
         
         dismissButton = UIButton()
@@ -127,10 +134,41 @@ class ProfileViewController: UIViewController {
         dismissButton.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
         whiteView.addSubview(dismissButton)
         
+        view.addSubview(colorView)
+        view.addSubview(whiteView)
+        
         setUpConstraints()
     }
     
     func setUpConstraints() {
+        colorView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(250)
+        }
+        
+        whiteView.snp.makeConstraints { make in
+            make.top.equalTo(colorView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(64)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(nameLabel.intrinsicContentSize)
+        }
+        
+        majorLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.height.equalTo(majorLabel.intrinsicContentSize)
+        }
+        
+        funFactLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(32)
+            make.top.equalTo(majorLabel.snp.bottom).offset(32)
+        }
+        
         noiseToleranceLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(32)
             make.top.equalTo(whiteView.snp.top).offset(32)
@@ -170,15 +208,15 @@ class ProfileViewController: UIViewController {
              make.height.equalTo(labelHeight) 
             }
         
-        WakingValueLabel.snp.makeConstraints { make in
+        wakingValueLabel.snp.makeConstraints { make in
              make.trailing.equalTo(noiseToleranceValueLabel.snp.trailing)
              make.top.equalTo(wakingLabel.snp.top)
             }
         
         dismissButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.SafeAreaLayoutGuide.snp.bottom).offset(-32)
-            make.width.equalToSuperview().offset(32)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-32)
+            make.width.equalToSuperview().offset(-32)
             make.height.equalTo(50)
         }
     }
