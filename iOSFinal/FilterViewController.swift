@@ -218,8 +218,11 @@ class FilterViewController: UIViewController {
     }
     
     @objc func filterSaveButtonPressed() {
+        let noiseToleranceValue = setNoiseTolerance(sender: noiseToleranceSlider)
+        let cleanlinessValue = setNoiseTolerance(sender: cleanlinessSlider)
+        let sleepingValue = setNoiseTolerance(sender: sleepingSlider)
+        let wakingValue = setNoiseTolerance(sender: wakingSlider)
         delegate?.filterSaveButtonPressed()
-        // send data to database
     }
     
     

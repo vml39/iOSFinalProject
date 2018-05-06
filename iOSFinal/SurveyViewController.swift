@@ -256,6 +256,10 @@ class SurveyViewController: UIViewController {
     }
     
     @objc func surveySaveButtonPressed() {
+        let noiseToleranceValue = setNoiseTolerance(sender: noiseToleranceSlider)
+        let cleanlinessValue = setNoiseTolerance(sender: cleanlinessSlider)
+        let sleepingValue = setNoiseTolerance(sender: sleepingSlider)
+        let wakingValue = setNoiseTolerance(sender: wakingSlider)
         if let _ = nameTextfield.text {
             delegate?.surveySaveButtonPressed()
         }

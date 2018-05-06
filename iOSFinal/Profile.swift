@@ -19,7 +19,6 @@ class Profile: NSObject {
     var sleeping: String
     var waking: String
     
-    // pull in data from api
     init(name:String, major: String, funFact: String, noiseTolerance: String, cleanliness: String, sleeping: String, waking: String) {
         self.name = name
         self.major = major
@@ -30,6 +29,7 @@ class Profile: NSObject {
         self.waking = waking
     }
     
+    // pull in data from api
     init(from json: JSON) {
         self.name = json["name"].stringValue
         self.major = json["major"].stringValue

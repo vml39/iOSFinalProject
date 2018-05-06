@@ -12,7 +12,7 @@
 //
 //class NetworkManager {
 //
-//    private static let endpoint = "https://mindylou.github.io/classes.json"
+//    private static let endpoint = "http://fillerendpoint"
 //
 //    static func getProfiles(withQuery query:String, _ completion: @escaping ([Profile]) -> Void) {
 //

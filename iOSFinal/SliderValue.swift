@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
-func setNoiseTolerance(noiseToleranceSlider: Float) -> String{
+func setNoiseTolerance(sender: UISlider) -> String{
+    let noiseToleranceSlider = sender.value
     var noiseToleranceValue: String
     if noiseToleranceSlider < 0.3 {
         noiseToleranceValue = "Low"
@@ -22,7 +24,8 @@ func setNoiseTolerance(noiseToleranceSlider: Float) -> String{
     return noiseToleranceValue
 }
 
-func setCleanliness(cleanlinessSlider: Float) -> String{
+func setCleanliness(sender: UISlider) -> String{
+    let cleanlinessSlider = sender.value
     var cleanlinessValue: String
     if cleanlinessSlider < 0.3 {
         cleanlinessValue = "Messy"
@@ -36,7 +39,8 @@ func setCleanliness(cleanlinessSlider: Float) -> String{
     return cleanlinessValue
 }
 
-func setSleeping(sleepingSlider: Float) -> String{
+func setSleeping(sender: UISlider) -> String{
+    let sleepingSlider = sender.value
     var sleepingValue: String
     if sleepingSlider < 0.3 {
         sleepingValue = "Before 11 PM"
@@ -50,7 +54,8 @@ func setSleeping(sleepingSlider: Float) -> String{
     return sleepingValue
 }
 
-func setWaking(wakingSlider: Float) -> String{
+func setWaking(sender: UISlider) -> String{
+    let wakingSlider = sender.value
     var wakingValue: String
     if wakingSlider < 0.3 {
         wakingValue = "Before 8 AM"
