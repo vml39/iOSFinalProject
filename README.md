@@ -9,26 +9,23 @@ Github: https://github.com/vml39/iOSFinalProject
 Screenshots
 
 Description
+Tired of sifting through the hundreds of posts in your university's roommate finder group and STILL ending up with an incompatible roommate? Introducing Roomie! Roomie allows you to create a profile and input basic information such as Name, Major, Fun Fact, Noise Tolerance, Cleanliness, Sleep Habits, and Wake Time. On the Discover page, users will see all of the other students looking for roommates and can tap on their profiles for more information. Users can also search for a specific person or filter through requirements in order to find a roommate with compatible living habits. The app makes finding the perfect roommate easier and would allow users to make friends with other students as well!
 
-Tired of sifting through the hundreds of posts in your university's roommate finder group and STILL ending up with an incompatible roommate? Introducing Roomie! Roomie allows you to create a profile and input basic information such as Name, Major, Fun Fact, Noise Tolerance, Cleanliness, Sleep Habits, and Wake Time. On the Discover page, users will see all of the other students looking for roommates and can tap on their profiles for more information. Users can also search for a specific person or filter through requirements in order to find a roommate with compatible living habits. The app makes finding the perfect roommate easier and would allow users to make friends with other students as well! 
-
-Future features of the would app include: 
-
-  *A profile picture
-  *Linking to Spotify and displaying top artists
-  *Linking to Facebook and displaying mutual friends
-  *Adding social media handles and a contact button
-  *Actual implementation of user accounts
-  *Sorting discover results based on highest similarity
+Future features of the would app include:
+  * A profile picture
+  * Linking to Spotify and displaying top artists
+  * Linking to Facebook and displaying mutual friends
+  * Adding social media handles and a contact button
+  * Actual implementation of user accounts
+  * Sorting discover results based on highest similarity
 
 Requirements
 
 iOS
-
-  *Autolayout was used to create this app
-  *TableView was used to display the profiles on the Discover page
-  *Navigation to the survey and filter
-  *API is not integrated, see comments at the end
+  * Autolayout was used to create this app
+  * TableView was used to display the profiles on the Discover page
+  * Navigation to the survey and filter
+  * API is not integrated, see comments at the end
 
 Backend
 
